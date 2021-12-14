@@ -75,7 +75,7 @@ const buscar = (req, res = request) => {
 
         const regex = new RegExp(termino, 'i');
 
-        const productos = await Producto.find({ nombre: regex, estado: true }).populate('categoria', 'nombre');;   
+        const productos = await Producto.find({ nombre: regex, estado: true }).populate('categoria', 'nombre');   
         
         res.json({
             results: productos
