@@ -1,19 +1,25 @@
-const mongoose =  require('mongoose');
+const mysql = require('mysql2/promise');
 
-
-const dbConnection = async () =>{
-    try {
-        await mongoose.connect(process.env.MONGOBD_CNN)
-
-        console.log("Base de datos online");
-
-    } catch (error) {
-        console.log(error);
-        throw new Error("Error en la coneccion a la BD");
+class MySQL{     
+    
+    async conectarDB(){
+        try{
+            const cnn = await mysql.createConnection({
+                host:'34.123.30.226',
+                user: 'root', 
+                database: 'pos-ventas'
+            });
+            return cnn;
+        }catch (error) {
+            console.log("Fallo en la conexion a la base de datos");
+        }
     }
+
+    async ejecutarQuery( query ){
+        const connection = await this.conectarDB();
+        const [rows, fields] = await connection.execute( query );
+        return rows
+    }    
 }
 
-
-module.exports = {
-    dbConnection
-}
+module.exports = MySQL;

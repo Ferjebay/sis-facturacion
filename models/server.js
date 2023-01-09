@@ -1,34 +1,25 @@
-const express = require('express');
+ const express = require('express');
 const cors = require('cors');
-const { dbConnection } = require('../database/config');
 const fileUpload = require('express-fileupload');
 
 class Server{
     
     constructor(){
+        this.cnn = "testing";
         this.app = express();
         this.port = process.env.PORT;
 
         this.paths = {
-            auth:       '/api/auth',
-            buscar:     '/api/buscar',
-            categorias: '/api/categorias',
-            productos:  '/api/productos',
-            usuarios:   '/api/usuarios',
-            uploads:    '/api/uploads'
+            auth:   '/api/auth',
+            buscar: '/api/buscar',
+            usuarios: '/api/usuarios',
+            roles: '/api/roles'
         }
         
-        //Conectar a la BD
-        this.conectarBD();
-
         //Midlewares
         this.midlewares();
         //Rutas de mi aplicacion
         this.routes();
-    }
-
-    async conectarBD(){
-        await dbConnection();
     }
 
     midlewares(){
@@ -52,10 +43,8 @@ class Server{
     routes(){
         this.app.use(this.paths.auth, require('../routes/auth'));
         this.app.use(this.paths.buscar, require('../routes/buscar'));
-        this.app.use(this.paths.categorias, require('../routes/categorias'));
-        this.app.use(this.paths.productos, require('../routes/productos'));
-        this.app.use(this.paths.usuarios, require('../routes/user'));
-        this.app.use(this.paths.uploads, require('../routes/uploads'));
+        this.app.use(this.paths.usuarios, require('../routes/usuarios'));
+        this.app.use(this.paths.roles, require('../routes/roles'));
     }
 
     listen(){        

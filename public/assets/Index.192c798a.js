@@ -1,0 +1,1 @@
+import{Q as e}from"./QPage.25f10e2e.js";import{_ as a,d as t,o,a2 as s,f as n,a as r}from"./index.ba1a224f.js";const c=t({name:"IndexPage"}),f=r("h1",null,"LISTADO DE PRODUCTOS DISPONIBLES",-1);function _(d,p,l,i,x,m){return o(),s(e,{class:"flex flex-center"},{default:n(()=>[f]),_:1})}var h=a(c,[["render",_]]);export{h as default};
